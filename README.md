@@ -9,7 +9,7 @@ Este repositorio contiene el registro completo de la asignatura **Estructura de 
 - Prácticas orientadas al análisis y uso eficiente de estructuras
 
 ## Estructuras abordadas
-- Arreglos y listas
+- Recursividad
 - Pilas y colas
 - Listas enlazadas
 - Árboles
