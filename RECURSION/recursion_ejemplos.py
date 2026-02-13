@@ -45,8 +45,114 @@ def contar_digitos(n):
   return 1+contar_digitos(n//10)
 print(contar_digitos(41156)) # 5
 
+# palabra al reves de fin a inicio
+
 def palabra_alreves(p1):
   if len(p1) == 1:
     return p1
   return p1[-1]+palabra_alreves(p1[:-1])
-print(palabra_alreves("mateo")) # oetam
+print(palabra_alreves("chao")) # oahc
+
+# palabra al reves con el indice
+
+def palabra_alreves(p1, index=0):
+  if index == len(p1):
+    return ""
+  return palabra_alreves(p1, index+1)+p1[index]
+print(palabra_alreves("chao")) # oahc
+
+def palabra_alreves(p1, index=0, pr=""):
+  if index == len(p1):
+    return pr
+  print("pr ->", pr)
+  print(". p1[index]", p1[index])
+  return palabra_alreves(p1, index+1, p1[index]+pr)
+print(palabra_alreves("chao")) # oahc
+
+# palabra palindrome sin indices
+
+def palabra_palindrome(p1):
+  if len(p1) == 1:
+    return True
+  if p1[-1] == p1[0]:
+    # llamado recursivo
+    return palabra_palindrome(p1[1:-1])
+  else:
+    # caso base
+    return False
+print(palabra_palindrome("rotor")) # True
+
+# palabra palindrome con indices
+
+def palabra_palindrome(p1, indice1=-1, indice2=-1):
+  if indice1 == -1 and indice2 == -1:
+    indice1 = 0
+    indice = len(p1) -1
+  print("indice1 -> ", indice1)
+  print("indice2 -> ", indice2)
+  # caso base
+  if indice1 == indice2 or indice2 < indice1:
+    return True
+  if p1[indice1] == p1[indice2]:
+    # llamado recursivo
+    return palabra_palindrome(p1, indice1+1, indice2-1)
+  else:
+    # caso base
+    return False
+print(palabra_palindrome("rotor")) # True
+
+# reversar lista
+
+def reversar_lista(l1):
+  if len(l1) == 1:
+    return l1 # l1[0] suma todos los valores
+  return [l1[-1]] + reversar_lista(l1[:-1])
+l1 = [5,7,9,13]
+print(l1)
+print(reversar_lista(l1))
+
+# reversar lista con indices
+
+def reversar_lista(l1,indice=0,lr=[]):
+  if indice == len(l1):
+    return lr
+  return reversar_lista(l1,indice+1,[l1[indice]]+lr)
+l1 = [5,7,9,13]
+print(l1)
+print(reversar_lista(l1))
+
+def busqueda_binaria(l1, obj, i_low = -1, i_high= -1):
+
+  if i_low == -1 and i_high == -1:
+    i_low = 0
+    i_high = len(l1) -1
+
+  print("i_low :",i_low)
+  print("i_high :",i_high)
+  i_med = (i_low + i_high)//2
+  print("i_med :",i_med)
+
+  if l1[i_med] == obj:
+    return "el objetivo fue encontrado en la posicion: " + str(i_med)
+
+  if i_low > i_high:
+    return "el objetivo NO fue encontrado"
+
+
+  if obj < l1[i_med]:
+    #busqueda en la primera mitad
+    print("obj < l1[i_med]")
+    return busqueda_binaria(l1, obj, i_low, i_med -1)
+  elif obj > l1[i_med]:
+    #busqueda en la segunda mitad
+    print("obj > l1[i_med]")
+    return busqueda_binaria(l1, obj, i_med + 1, i_high)
+
+
+l1 = [1,3,5,7,9,11,23,26]
+v1 = 3
+v2 = 23
+v3 = 14
+print(f"el valor {v1} : {busqueda_binaria(l1,v1)}")
+#print(f"el valor {v2} : {busqueda_binaria(l1,v2)}")
+#print(f"el valor {v3} : {busqueda_binaria(l1,v3)}")
