@@ -148,6 +148,7 @@ def busqueda_binaria(l1, obj, i_low = -1, i_high= -1):
     print("obj > l1[i_med]")
     return busqueda_binaria(l1, obj, i_med + 1, i_high)
 
+# contador de vocales y consonantes
 
 l1 = [1,3,5,7,9,11,23,26]
 v1 = 3
@@ -156,3 +157,167 @@ v3 = 14
 print(f"el valor {v1} : {busqueda_binaria(l1,v1)}")
 #print(f"el valor {v2} : {busqueda_binaria(l1,v2)}")
 #print(f"el valor {v3} : {busqueda_binaria(l1,v3)}")
+
+def contarvocycons(p1, index=0,contv=0, contc=0):
+
+  if index == len(p1):
+
+    if contv == contc:
+      return "Cantidades Iguales!"
+    elif contv > contc:
+      return "Mas vocales!"
+    else:
+      return "Mas consonantes!"
+
+  vocales = ["a","e","i","o","u"]
+
+  #print("p1[index]",p1[index])
+  #print("contv",contv)
+  #print("contc",contc)
+  if p1[index].isalpha():
+    if p1[index] in vocales:
+      return contarvocycons(p1, index+1,contv+1, contc)
+    else:
+      return contarvocycons(p1, index+1,contv, contc+1)
+  else:
+    return "Error, entrada no valida, no es alfabetica"
+
+p1 = "arnulfo"
+p2 = "avioneta"
+p3 = "casa"
+p4 = "ar6%ca"
+
+print(f"la palabra {p1} tiene {contarvocycons(p1)}")
+#print(f"la palabra {p2} tiene {contarvocycons(p2)}")
+#print(f"la palabra {p3} tiene {contarvocycons(p3)}")
+print(f"la palabra {p4} tiene {contarvocycons(p4)}")
+
+def contarvocycons(p1):
+
+  vocales = ["a","e","i","o","u"]
+
+  def auxcontarvocycons(p1, vocales, index=0,contv=0, contc=0):
+    if index == len(p1):
+      if contv == contc:
+        return "Cantidades Iguales!"
+      elif contv > contc:
+        return "Mas vocales!"
+      else:
+        return "Mas consonantes!"
+
+
+    if p1[index].isalpha():
+        if p1[index] in vocales:
+          return auxcontarvocycons(p1, vocales, index+1,contv+1, contc)
+        else:
+          return auxcontarvocycons(p1, vocales, index+1,contv, contc+1)
+    else:
+        return "Error, entrada no valida, no es alfabetica"
+
+  return auxcontarvocycons(p1,vocales)
+
+p1 = "arnulfo"
+p2 = "avioneta"
+p3 = "casa"
+p4 = "ar6%ca"
+
+print(f"la palabra {p1} tiene {contarvocycons(p1)}")
+
+# valor maximo de una lista, sin ordenar
+
+def buscarmax(l1):
+
+  if len(l1) == 1:
+    return l1[0]
+
+  return max(l1[0],buscarmax(l1[1:]))
+
+lista = [11,2,4,7,19,3]
+print("Lista :", lista)
+print(f"el valor maximo de la lista es {buscarmax(lista)}")
+
+def buscarmax2(l1,index=0):
+
+  if len(l1)-1 == index:
+    return l1[index]
+
+  return max(l1[index],buscarmax2(l1,index+1))
+
+lista = [11,2,4,7,19,3]
+print("Lista :", lista)
+print(f"el valor maximo de la lista es {buscarmax2(lista)}")
+
+def buscarmax3(l1,index=0):
+
+  if len(l1)-1 == index:
+    return l1[index]
+
+  resto = buscarmax3(l1,index+1)
+  return l1[index] if l1[index] > resto else resto
+
+lista = [11,24,4,7,19,3]
+print("Lista :", lista)
+print(f"el valor maximo de la lista es {buscarmax3(lista)}")
+
+# Multiplos de un numero
+
+def contarmultiplos(num,cont=0):
+
+  if num == 0:
+    return cont
+
+  #print("num :",num)
+  digito = num%10
+  #print("digito :", digito)
+
+  if digito == 0:
+    return contarmultiplos(num//10,cont)
+  if digito % 2 == 0 and digito % 4 == 0:
+    return contarmultiplos(num//10,cont+1)
+  else:
+    return contarmultiplos(num//10,cont)
+
+num1 = 34523
+num2 = 84842
+num3 = 60021
+
+print(f"el numero {num1} tiene: {contarmultiplos(num1)} digitos multiplos del 2 y 4")
+print(f"el numero {num2} tiene: {contarmultiplos(num2)} digitos multiplos del 2 y 4")
+print(f"el numero {num3} tiene: {contarmultiplos(num3)} digitos multiplos del 2 y 4")
+
+num = 9
+print(num//10)
+print(num%10)
+
+# Enteros de diagonal principal cuadrada son iguales en una matriz
+
+# matriz
+
+m1 = [[2,3,6],
+      [9,2,6],
+      [4,5,2]]
+
+m2 = [[2,3,6],
+      [9,2,6],
+      [4,5,5]]
+
+m3 = [[2,3,6,5,6],
+      [9,2,6,4,7],
+      [4,5,2,7,8],
+      [4,5,5,2,2],
+      [4,5,5,7,2]]
+
+def validardiagonales(m1,i=0):
+
+  if i == len(m1) -1 :
+    return True
+
+  print("i",i)
+  if m1[i][i] == m1[i+1][i+1]:
+    return validardiagonales(m1,i+1)
+  else:
+    return False
+
+print(f"la matriz 1 tiene los valores en la diagonal iguales? {validardiagonales(m1)}")
+print(f"la matriz 2 tiene los valores en la diagonal iguales? {validardiagonales(m2)}")
+print(f"la matriz 3 tiene los valores en la diagonal iguales? {validardiagonales(m3)}")
